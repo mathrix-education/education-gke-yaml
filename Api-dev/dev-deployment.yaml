@@ -30,10 +30,16 @@ spec:
     spec:
       containers:
       - env:
+        - name: APP_ENV
+          value: dev
+        - name: APP_DEBUG
+          value: "true"
+        - name: APP_TIMEZONE
+          value: Europe/Paris
         - name: CACHE_DRIVER
           value: file
         - name: QUEUE_DRIVER
-          value: array
+          value: sync
         - name: APP_WEBROOT
           value: https://dev.mathrix.fr
         - name: APP_API
@@ -50,8 +56,10 @@ spec:
           value: dev_mathrix_education
         - name: DB_USERNAME
           value: dev-education
-        - name: MAILGUN_ENVIRONMENT
-          value: disabled
+        - name: GOOGLE_CLOUD_STORAGE_BUCKET
+          value: dev.cdn.mathrix.fr
+        - name: SENTRY_DSN
+          value: https://9df8f86886e5414987f68d2096adbc2c@sentry.mathrix.fr/2
         - name: MAILGUN_DOMAIN
           value: sandbox0aa19ceedf694eff93133d0650048b38.mailgun.org
         - name: BRAINTREE_ENVIRONMENT
@@ -62,8 +70,6 @@ spec:
           value: mathrixeducationsa
         - name: BRAINTREE_PUBLIC_KEY
           value: 3ddb9n3w722b377d
-        - name: GOOGLE_CLOUD_STORAGE_BUCKET
-          value: dev.cdn.mathrix.fr
         - name: ANALYTICS_ID
           value: UA-62513242-5
         - name: APP_KEY
@@ -91,11 +97,6 @@ spec:
             secretKeyRef:
               key: MAILGUN_SECRET_DEV
               name: mailgun-secret-secret
-        - name: MAILCHIMP_API_KEY
-          valueFrom:
-            secretKeyRef:
-              key: MAILCHIMP_API_KEY_DEV
-              name: mailchimp-api-key-secret
         - name: STRIPE_SECRET
           valueFrom:
             secretKeyRef:
@@ -106,7 +107,7 @@ spec:
             secretKeyRef:
               key: BRAINTREE_PRIVATE_KEY_DEV
               name: braintree-private-key-secret
-        image: eu.gcr.io/mathrix-education/education-api:a387d1f
+        image: eu.gcr.io/mathrix-education/education-api:008bd35
         imagePullPolicy: IfNotPresent
         name: dev-education-api
         resources:
