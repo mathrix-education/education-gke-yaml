@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: education-redoc
+    environment: dev
+    tier: doc
+  name: dev-education-api-redoc-deployment
+  namespace: default
+spec:
+  progressDeadlineSeconds: 60
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: education-api-redoc
+      environment: dev
+      tier: doc
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: education-api-redoc
+        environment: dev
+        tier: doc
+    spec:
+      containers:
+      - image: eu.gcr.io/mathrix-education/education-api-redoc:latest-dev
+        imagePullPolicy: IfNotPresent
+        name: dev-education-api-redoc
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 10
+

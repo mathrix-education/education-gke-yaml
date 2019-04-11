@@ -1,0 +1,79 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: dev.mathrix.fr-certificate
+  namespace: default
+spec:
+  secretName: dev.mathrix.fr-secret
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  commonName: dev.mathrix.fr
+  dnsNames:
+  - dev.mathrix.fr
+  acme:
+    config:
+    - dns01:
+        provider: clouddns
+      domains:
+      - dev.mathrix.fr
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: dev.cdn.mathrix.fr-certificate
+  namespace: default
+spec:
+  secretName: dev.cdn.mathrix.fr-secret
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  commonName: dev.cdn.mathrix.fr
+  dnsNames:
+  - dev.cdn.mathrix.fr
+  acme:
+    config:
+    - dns01:
+        provider: clouddns
+      domains:
+      - dev.cdn.mathrix.fr
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: prod.mathrix.fr-certificate
+  namespace: default
+spec:
+  secretName: prod.mathrix.fr-secret
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  commonName: prod.mathrix.fr
+  dnsNames:
+  - prod.mathrix.fr
+  acme:
+    config:
+    - dns01:
+        provider: clouddns
+      domains:
+      - prod.mathrix.fr
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: cdn.mathrix.fr-certificate
+  namespace: default
+spec:
+  secretName: cdn.mathrix.fr-secret
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  commonName: cdn.mathrix.fr
+  dnsNames:
+  - cdn.mathrix.fr
+  acme:
+    config:
+    - dns01:
+        provider: clouddns
+      domains:
+      - cdn.mathrix.fr
