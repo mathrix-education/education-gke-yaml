@@ -15,7 +15,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: prod.mathrix.fr
+  - host: mathrix.fr
     http:
       paths:
       - backend:
@@ -24,8 +24,8 @@ spec:
         path: /sitemap.xml
   tls:
   - hosts:
-    - prod.mathrix.fr
-    secretName: prod.mathrix.fr-secret
+    - mathrix.fr
+    secretName: mathrix.fr-secret
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -44,7 +44,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: prod.mathrix.fr
+  - host: mathrix.fr
     http:
       paths:
       - backend:

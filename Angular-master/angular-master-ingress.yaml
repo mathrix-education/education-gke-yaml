@@ -14,7 +14,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: prod.mathrix.fr
+  - host: mathrix.fr
     http:
       paths:
       - backend:
@@ -23,7 +23,7 @@ spec:
         path: /
   tls:
   - hosts:
-    - prod.mathrix.fr
-    secretName: prod.mathrix.fr-secret
+    - mathrix.fr
+    secretName: mathrix.fr-secret
 
 
