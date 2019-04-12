@@ -107,7 +107,7 @@ spec:
             secretKeyRef:
               key: BRAINTREE_PRIVATE_KEY_MASTER
               name: braintree-private-key-secret
-        image: eu.gcr.io/mathrix-education/education-api:008bd35
+        image: eu.gcr.io/mathrix-education/education-api:38c9557
         imagePullPolicy: IfNotPresent
         name: master-education-api
         resources:

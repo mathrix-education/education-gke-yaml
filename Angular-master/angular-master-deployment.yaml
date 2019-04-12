@@ -28,7 +28,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: gcr.io/google-containers/test-webserver:latest
+      - image: gcr.io/google-containers/test-webserver:dc32918
         imagePullPolicy: IfNotPresent
         name: master-education-angular
         resources: {}

@@ -53,8 +53,8 @@ spec:
         path: /api/?(.*)
   tls:
   - hosts:
-    - prod.mathrix.fr
-    secretName: prod.mathrix.fr-secret
+    - mathrix.fr
+    secretName: mathrix.fr-secret
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
