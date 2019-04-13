@@ -37,7 +37,7 @@ spec:
         - name: APP_TIMEZONE
           value: Europe/Paris
         - name: CACHE_DRIVER
-          value: file
+          value: database
         - name: QUEUE_DRIVER
           value: sync
         - name: APP_WEBROOT

@@ -43,7 +43,7 @@ spec:
         - name: APP_CDN
           value: https://cdn.mathrix.fr
         - name: CACHE_DRIVER
-          value: file
+          value: database
         - name: QUEUE_DRIVER
           value: sync
         - name: DB_CONNECTION
