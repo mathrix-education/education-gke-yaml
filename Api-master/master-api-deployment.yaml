@@ -44,6 +44,7 @@ spec:
           value: https://cdn.mathrix.fr
         - name: CACHE_DRIVER
           value: database
+        - name: CACHE_PREFIX
         - name: QUEUE_DRIVER
           value: sync
         - name: DB_CONNECTION

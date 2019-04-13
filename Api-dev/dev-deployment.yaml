@@ -38,6 +38,7 @@ spec:
           value: Europe/Paris
         - name: CACHE_DRIVER
           value: database
+        - name: CACHE_DRIVER
         - name: QUEUE_DRIVER
           value: sync
         - name: APP_WEBROOT
