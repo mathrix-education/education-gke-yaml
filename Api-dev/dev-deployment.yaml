@@ -50,7 +50,7 @@ spec:
         - name: DB_CONNECTION
           value: mysql
         - name: DB_HOST
-          value: localhost
+          value: 10.98.80.3
         - name: DB_PORT
           value: "3306"
         - name: DB_DATABASE
@@ -108,7 +108,7 @@ spec:
             secretKeyRef:
               key: BRAINTREE_PRIVATE_KEY_DEV
               name: braintree-private-key-secret
-        image: eu.gcr.io/mathrix-education/education-api:1bfd021
+        image: eu.gcr.io/mathrix-education/education-api:99bc234
         imagePullPolicy: IfNotPresent
         name: dev-education-api
         resources:
@@ -119,18 +119,6 @@ spec:
         volumeMounts:
         - name: dev-cdn-key
           mountPath: /var/www/storage/google-cloud-storage
-      - name: cloudsql-proxy
-        image: gcr.io/cloudsql-docker/gce-proxy:1.11
-        command: ["/cloud_sql_proxy",
-                  "-instances=mathrix-education:europe-west1:mysql=tcp:3306",
-                  "-credential_file=/secrets/cloudsql/credentials.json"]
-        securityContext:
-          runAsUser: 2 
-          allowPrivilegeEscalation: false
-        volumeMounts:
-          - name: cloudsql-instance-credentials
-            mountPath: /secrets/cloudsql
-            readOnly: true
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
