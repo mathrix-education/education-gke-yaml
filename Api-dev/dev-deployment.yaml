@@ -50,7 +50,7 @@ spec:
         - name: DB_CONNECTION
           value: mysql
         - name: DB_HOST
-          value: 127.0.0.1
+          value: localhost
         - name: DB_PORT
           value: "3306"
         - name: DB_DATABASE
@@ -108,7 +108,7 @@ spec:
             secretKeyRef:
               key: BRAINTREE_PRIVATE_KEY_DEV
               name: braintree-private-key-secret
-        image: eu.gcr.io/mathrix-education/education-api:008bd35
+        image: eu.gcr.io/mathrix-education/education-api:1bfd021
         imagePullPolicy: IfNotPresent
         name: dev-education-api
         resources:
@@ -121,10 +121,12 @@ spec:
           mountPath: /var/www/storage/google-cloud-storage
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.11
-        command: ["/cloud_sql_proxy","-instances=<INSTANCE_CONNECTION_NAME>=tcp:3306","-credential_file=/secrets/cloudsql/credentials.json"]
+        command: ["/cloud_sql_proxy",
+                  "-instances=mathrix-education:europe-west1:mysql=tcp:3306",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
         securityContext:
-          runAsUser: 2
-          allowPrivilegeEscalation: false  
+          runAsUser: 2 
+          allowPrivilegeEscalation: false
         volumeMounts:
           - name: cloudsql-instance-credentials
             mountPath: /secrets/cloudsql
@@ -138,6 +140,3 @@ spec:
         - name: dev-cdn-key
           configMap:
             name: dev-education-cdn-key
-        - name: cloudsql-instance-credentials
-          secret:
-            secretName: cloudsql-instance-credentials
