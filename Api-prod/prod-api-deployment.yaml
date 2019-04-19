@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: education-api
-    environment: master
+    environment: prod
     tier: backend
   name: prod-education-api-deployment
   namespace: default
@@ -13,7 +13,7 @@ spec:
   selector:
     matchLabels:
       app: education-api
-      environment: master
+      environment: prod
       tier: backend
   strategy:
     rollingUpdate:
@@ -25,7 +25,7 @@ spec:
       creationTimestamp: null
       labels:
         app: education-api
-        environment: master
+        environment: prod
         tier: backend
     spec:
       containers:
@@ -45,6 +45,7 @@ spec:
         - name: CACHE_DRIVER
           value: database
         - name: CACHE_PREFIX
+          value: ""
         - name: QUEUE_DRIVER
           value: sync
         - name: DB_CONNECTION

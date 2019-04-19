@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: education-angular
-    environment: master
+    environment: prod
     tier: frontend
   name: prod-education-angular-service
   namespace: default
@@ -15,7 +15,7 @@ spec:
     targetPort: 8081
   selector:
     app: education-angular
-    environment: master
+    environment: prod
     tier: frontend
   sessionAffinity: None
   type: NodePort

@@ -8,9 +8,9 @@ metadata:
     nginx.org/server-snippets: gzip on; gzip_proxied any; gzip_types image/jpeg;
   labels:
     app: education-angular
-    environment: master
+    environment: prod
     tier: backend
-  name: prod-education-angular-ingress
+  name: master-education-angular-ingress
   namespace: default
 spec:
   rules:
@@ -18,7 +18,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: prod-education-angular-service
+          serviceName: master-education-angular-service
           servicePort: 8081
         path: /
   tls:

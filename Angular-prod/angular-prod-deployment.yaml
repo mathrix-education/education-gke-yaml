@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: education-angular
-    environment: master
+    environment: prod
     tier: frontend
   name: prod-education-angular-deployment
   namespace: default
@@ -13,7 +13,7 @@ spec:
   selector:
     matchLabels:
       app: education-angular
-      environment: master
+      environment: prod
       tier: frontend
   strategy:
     rollingUpdate:
@@ -24,7 +24,7 @@ spec:
     metadata:
       labels:
         app: education-angular
-        environment: master
+        environment: prod
         tier: frontend
     spec:
       containers:
