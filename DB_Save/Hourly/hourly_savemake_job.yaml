@@ -1,0 +1,39 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hourly-save
+spec:
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: savemaker
+        spec:
+          containers:
+          - image: eu.gcr.io/mathrix-education/savemaker:latest
+            imagePullPolicy: IfNotPresent
+            name: savemaker
+            command: ["/bin/sh"]
+            args: ["-c","./hourly_save.sh"]
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/www/sa-key
+              name: key
+            - mountPath: /var/www
+              name: script
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: savemaker-key
+            name: key
+          - configMap:
+              defaultMode: 111
+              name: savemaker-hourlyly-script
+            name: script
+  schedule: '@hourly'
+
