@@ -33,7 +33,7 @@ spec:
             name: key
           - configMap:
               defaultMode: 111
-              name: savemaker-hourlyly-script
+              name: savemaker-hourly-script
             name: script
   schedule: '@hourly'
 

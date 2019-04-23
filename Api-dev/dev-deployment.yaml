@@ -38,9 +38,9 @@ spec:
           value: Europe/Paris
         - name: CACHE_DRIVER
           value: database
-        - name: CACHE_DRIVER
+        - name: CACHE_PREFIX
         - name: QUEUE_DRIVER
-          value: sync
+          value: database
         - name: APP_WEBROOT
           value: https://dev.mathrix.fr
         - name: APP_API
@@ -108,7 +108,7 @@ spec:
             secretKeyRef:
               key: BRAINTREE_PRIVATE_KEY_DEV
               name: braintree-private-key-secret
-        image: eu.gcr.io/mathrix-education/education-api:99bc234
+        image: eu.gcr.io/mathrix-education/education-api:7ef4dbb
         imagePullPolicy: IfNotPresent
         name: dev-education-api
         resources:
