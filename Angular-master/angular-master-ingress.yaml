@@ -6,6 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_clear_headers Server;
     nginx.org/server-snippets: gzip on; gzip_proxied any; gzip_types image/jpeg;
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
   labels:
     app: education-angular
     environment: master

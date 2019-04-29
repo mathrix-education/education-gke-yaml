@@ -6,11 +6,13 @@ gcloud auth activate-service-account education-sa-savemaker@mathrix-education.ia
 gcloud config set project mathrix-education
 gcloud sql export sql mysql gs://backups-education/hourly_saves/$DATE/db_save.gz --database=master_mathrix_education
 cd ~
-mkdir cdn_save
-gsutil -m cp -r gs://cdn.mathrix.fr cdn_save
-zip -r cdn_save.zip cdn_save
-gsutil cp cdn_save.zip gs://backups-education/hourly_saves/$DATE
+mkdir source
+mkdir dest
+gcsfuse cdn.mathrix.fr source
+gcsfuse backups-education dest
+zip -r dest/hourly_saves/$DATE/cdn.zip source
 #if [ "$(gsutil ls gs://backups-education/hourly_saves | wc -l)" -gt "169" ]; then 
 # TODELETE=($( gsutil ls gs://backups-education/hourly_saves ))
 # gsutil -m rm -r ${TODELETE[1]}
 #fi
+exit 0

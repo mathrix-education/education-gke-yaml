@@ -7,6 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_clear_headers Server;
     nginx.org/server-snippets: gzip on; gzip_proxied any; gzip_types image/jpeg;
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
   labels:
     app: education-api
     environment: master
@@ -36,6 +37,7 @@ metadata:
       more_clear_headers Server;
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.org/server-snippets: gzip on; gzip_proxied any; gzip_types image/jpeg;
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
   labels:
     app: education-api
     environment: master
@@ -61,15 +63,16 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /files/proxy/$1
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_clear_headers Server;
-    nginx.ingress.kubernetes.io/rewrite-target: /cdn/$1
     nginx.org/server-snippets: gzip on; gzip_proxied any; gzip_types image/jpeg;
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
   labels:
     app: education-api
     environment: master
     tier: backend
-  name: master-education-cdn-ingress
+  name: cdn-domain-ingress
   namespace: default
 spec:
   rules:
@@ -84,4 +87,5 @@ spec:
   - hosts:
     - cdn.mathrix.fr
     secretName: cdn.mathrix.fr-secret
+
 

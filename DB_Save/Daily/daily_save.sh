@@ -10,4 +10,5 @@ mkdir cdn_save
 gsutil -m cp -r gs://cdn.mathrix.fr cdn_save
 zip -r cdn_save.zip cdn_save
 gsutil cp cdn_save.zip gs://backups-education/daily_saves/$DATE
+exit 0
 
