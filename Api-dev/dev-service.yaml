@@ -21,5 +21,16 @@ spec:
     tier: backend
   sessionAffinity: None
   type: NodePort
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: education-cdn
+    environment: dev
+    tier: backend
+  name: dev-education-cdn-service
+spec:
+  externalName: storage.googleapis.com
+  type: ExternalName
 

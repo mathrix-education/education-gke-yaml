@@ -61,12 +61,13 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /files/proxy/$1
+    nginx.ingress.kubernetes.io/rewrite-target: "/dev.cdn.mathrix.fr/$1"
+    nginx.ingress.kubernetes.io/upstream-vhost: "storage.googleapis.com"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_clear_headers Server;
     nginx.org/server-snippets: gzip on; gzip_proxied any; gzip_types image/jpeg;
   labels:
-    app: education-api
+    app: education-cdn
     environment: dev
     tier: backend
   name: dev-cdn-domain-ingress
@@ -77,13 +78,15 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: dev-education-api-service
+          serviceName: dev-education-cdn-service
           servicePort: 80
         path: /?(.*)
   tls:
   - hosts:
     - dev.cdn.mathrix.fr
     secretName: dev.cdn.mathrix.fr-secret
+
+
 
 
 
