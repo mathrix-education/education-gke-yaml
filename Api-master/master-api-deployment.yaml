@@ -108,7 +108,7 @@ spec:
             secretKeyRef:
               key: BRAINTREE_PRIVATE_KEY_MASTER
               name: braintree-private-key-secret
-        image: eu.gcr.io/mathrix-education/education-api:b4a4a78
+        image: eu.gcr.io/mathrix-education/education-api:latest-master
         imagePullPolicy: IfNotPresent
         name: master-education-api
         resources:
@@ -119,6 +119,8 @@ spec:
         volumeMounts:
         - mountPath: /var/www/storage/google-cloud-storage
           name: master-cdn-key
+        - name: master-cdn-keychain
+          mountPath: /var/www/storage/keychain
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -129,3 +131,6 @@ spec:
           defaultMode: 420
           name: master-education-cdn-key
         name: master-cdn-key
+      - name: master-cdn-keychain
+        configMap:
+          name: master-education-keychain

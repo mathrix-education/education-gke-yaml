@@ -108,7 +108,7 @@ spec:
             secretKeyRef:
               key: BRAINTREE_PRIVATE_KEY_DEV
               name: braintree-private-key-secret
-        image: eu.gcr.io/mathrix-education/education-api:7ef4dbb
+        image: eu.gcr.io/mathrix-education/education-api:latest-dev
         imagePullPolicy: IfNotPresent
         name: dev-education-api
         resources:
@@ -117,14 +117,14 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
-        - name: dev-cdn-key
-          mountPath: /var/www/storage/google-cloud-storage
+        - name: dev-cdn-keychain
+          mountPath: /var/www/storage/keychain
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 10
       volumes:
-        - name: dev-cdn-key
+        - name: dev-cdn-keychain
           configMap:
-            name: dev-education-cdn-key
+            name: dev-education-keychain
