@@ -42,7 +42,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: dev-api-env-configmap
-              key:app_debug
+              key: app_debug
         - name: APP_TIMEZONE
           valueFrom:
             configMapKeyRef:
