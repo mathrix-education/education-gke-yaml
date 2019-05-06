@@ -5,16 +5,18 @@ metadata:
     app: education-api
     environment: dev
     tier: backend
-  name: dev-education-api-deployment
+    type: scheduler
+  name: dev-education-api-scheduler-deployment
   namespace: default
 spec:
   progressDeadlineSeconds: 60
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: education-api
       environment: dev
       tier: backend
+      type: scheduler
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -27,52 +29,120 @@ spec:
         app: education-api
         environment: dev
         tier: backend
+        type: scheduler
     spec:
       containers:
       - env:
         - name: APP_ENV
-          value: dev
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_env
         - name: APP_DEBUG
-          value: "true"
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key:app_debug
         - name: APP_TIMEZONE
-          value: Europe/Paris
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_timezone
         - name: CACHE_DRIVER
-          value: database
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: cache_driver
         - name: CACHE_PREFIX
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: cache_prefix
         - name: QUEUE_DRIVER
-          value: database
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: queue_driver
         - name: APP_WEBROOT
-          value: https://dev.mathrix.fr
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_webroot
         - name: APP_API
-          value: https://dev.mathrix.fr/api
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_api
         - name: APP_CDN
-          value: https://dev.cdn.mathrix.fr
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_cdn
         - name: DB_CONNECTION
-          value: mysql
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_connection
         - name: DB_HOST
-          value: 10.98.80.3
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_host
         - name: DB_PORT
-          value: "3306"
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_port
         - name: DB_DATABASE
-          value: dev_mathrix_education
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_database
         - name: DB_USERNAME
-          value: dev-education
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_username
         - name: GOOGLE_CLOUD_STORAGE_BUCKET
-          value: dev.cdn.mathrix.fr
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: google_cloud_storage_bucket
         - name: SENTRY_DSN
-          value: https://9df8f86886e5414987f68d2096adbc2c@sentry.mathrix.fr/2
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: sentry_dsn
         - name: MAILGUN_DOMAIN
-          value: sandbox0aa19ceedf694eff93133d0650048b38.mailgun.org
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: mailgun_domain
         - name: BRAINTREE_ENVIRONMENT
-          value: sandbox
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: braintree_environment
         - name: BRAINTREE_MERCHANT_ID
-          value: 7mjzzwmq2thkzy42
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: braintree_merchant_id
         - name: BRAINTREE_MERCHANT_ACCOUNT
-          value: mathrixeducationsa
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: braintree_merchant_account
         - name: BRAINTREE_PUBLIC_KEY
-          value: 3ddb9n3w722b377d
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: braintree_public_key
         - name: ANALYTICS_ID
-          value: UA-62513242-5
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: analytics_id
         - name: APP_KEY
           valueFrom:
             secretKeyRef:
@@ -110,7 +180,9 @@ spec:
               name: braintree-private-key-secret
         image: eu.gcr.io/mathrix-education/education-api:latest-dev
         imagePullPolicy: IfNotPresent
-        name: dev-education-api
+        args: 
+        - scheduler
+        name: scheduler
         resources:
           requests:
             cpu: 20m

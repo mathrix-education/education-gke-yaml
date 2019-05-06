@@ -1,0 +1,194 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: education-api
+    environment: dev
+    tier: backend
+    type: server
+  name: dev-education-api-server-deployment
+  namespace: default
+spec:
+  progressDeadlineSeconds: 60
+  replicas: 4
+  selector:
+    matchLabels:
+      app: education-api
+      environment: dev
+      tier: backend
+      type: server
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: education-api
+        environment: dev
+        tier: backend
+        type: server
+    spec:
+      containers:
+      - env:
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_env
+        - name: APP_DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key:app_debug
+        - name: APP_TIMEZONE
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_timezone
+        - name: CACHE_DRIVER
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: cache_driver
+        - name: CACHE_PREFIX
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: cache_prefix
+        - name: QUEUE_DRIVER
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: queue_driver
+        - name: APP_WEBROOT
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_webroot
+        - name: APP_API
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_api
+        - name: APP_CDN
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: app_cdn
+        - name: DB_CONNECTION
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_connection
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_host
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_port
+        - name: DB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_database
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: db_username
+        - name: GOOGLE_CLOUD_STORAGE_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: google_cloud_storage_bucket
+        - name: SENTRY_DSN
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: sentry_dsn
+        - name: MAILGUN_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: mailgun_domain
+        - name: BRAINTREE_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: braintree_environment
+        - name: BRAINTREE_MERCHANT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: braintree_merchant_id
+        - name: BRAINTREE_MERCHANT_ACCOUNT
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: braintree_merchant_account
+        - name: BRAINTREE_PUBLIC_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: braintree_public_key
+        - name: ANALYTICS_ID
+          valueFrom:
+            configMapKeyRef:
+              name: dev-api-env-configmap
+              key: analytics_id
+        - name: APP_KEY
+          valueFrom:
+            secretKeyRef:
+              key: APP_KEY_DEV
+              name: app-key-secret
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: DB_PASSWORD_DEV
+              name: db-password-secret
+        - name: MAILGUN_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: MAILGUN_SECRET_DEV
+              name: mailgun-secret-secret
+        - name: STRIPE_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: STRIPE_SECRET_DEV
+              name: stripe-secret-secret
+        - name: BRAINTREE_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: BRAINTREE_PRIVATE_KEY_DEV
+              name: braintree-private-key-secret
+        command: 
+        - /entrypoint.sh
+        args:
+        - server
+        image: eu.gcr.io/mathrix-education/education-api:latest-dev
+        imagePullPolicy: IfNotPresent
+        name: server
+        resources:
+          requests:
+            cpu: 20m
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - name: dev-cdn-keychain
+          mountPath: /var/www/storage/keychain
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: dev-cdn-keychain
+          configMap:
+            name: dev-education-keychain
