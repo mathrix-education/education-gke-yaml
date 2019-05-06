@@ -198,5 +198,5 @@ spec:
       terminationGracePeriodSeconds: 10
       volumes:
         - name: dev-cdn-keychain
-          configMap:
-            name: dev-education-keychain
+          secret:
+            secretName: dev-education-keychain
