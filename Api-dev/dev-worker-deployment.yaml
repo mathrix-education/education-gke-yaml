@@ -32,42 +32,8 @@ spec:
       - envFrom:
         - configMapRef: 
             name: dev-api-env-configmap
-        env:
-        - name: APP_KEY
-          valueFrom:
-            secretKeyRef:
-              key: APP_KEY_DEV
-              name: app-key-secret
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: DB_PASSWORD_DEV
-              name: db-password-secret
-        - name: SLACK_WEBHOOK_SUPERVISOR
-          valueFrom:
-            secretKeyRef:
-              key: SLACK_WEBHOOK_SUPERVISOR_DEV
-              name: slack-webhook-supervisor-secret
-        - name: SLACK_WEBHOOK_PREMIUM
-          valueFrom:
-            secretKeyRef:
-              key: SLACK_WEBHOOK_PREMIUM_DEV
-              name: slack-webhook-premium-secret
-        - name: MAILGUN_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: MAILGUN_SECRET_DEV
-              name: mailgun-secret-secret
-        - name: STRIPE_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: STRIPE_SECRET_DEV
-              name: stripe-secret-secret
-        - name: BRAINTREE_PRIVATE_KEY
-          valueFrom:
-            secretKeyRef:
-              key: BRAINTREE_PRIVATE_KEY_DEV
-              name: braintree-private-key-secret
+        - secretRef:
+            name: dev-env-secret
         image: eu.gcr.io/mathrix-education/education-api:latest-dev
         imagePullPolicy: IfNotPresent
         command: ["php"]
