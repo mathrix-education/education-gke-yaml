@@ -17,5 +17,3 @@ spec:
               name: clouddns
               key: clouddns.key.json
             project: mathrix-education
-
-
