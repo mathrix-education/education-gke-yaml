@@ -5,6 +5,7 @@ metadata:
     app: education-api
     environment: master
     tier: backend
+    type: server
   name: master-education-api-service
   namespace: default
 spec:
@@ -17,6 +18,7 @@ spec:
     app: education-api
     environment: master
     tier: backend
+    type: server
   sessionAffinity: None
   type: NodePort
 ---
@@ -27,6 +29,7 @@ metadata:
     app: education-cdn
     environment: master
     tier: backend
+    type: server
   name: master-education-cdn-service
 spec:
   externalName: storage.googleapis.com
