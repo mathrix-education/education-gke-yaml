@@ -1,14 +1,18 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-api-env-configmap
 data:
   APP_ENV: dev
+  APP_WEBROOT: https://dev.mathrix.fr
+  APP_API: https://dev.mathrix.fr/api
+  APP_CDN: https://dev.cdn.mathrix.fr
   APP_DEBUG: "true"
   APP_TIMEZONE: Europe/Paris
   CACHE_DRIVER: database
   CACHE_PREFIX: ""
   QUEUE_DRIVER: database
-  APP_WEBROOT: https://dev.mathrix.fr
-  APP_API: https://dev.mathrix.fr/api
-  APP_CDN: https://dev.cdn.mathrix.fr
+  LOG_CHANNEL: stackdriver
   DB_CONNECTION: mysql
   DB_HOST: 10.98.80.3
   DB_PORT: "3306"
@@ -22,6 +26,3 @@ data:
   BRAINTREE_MERCHANT_ACCOUNT: mathrixeducationsa
   BRAINTREE_PUBLIC_KEY: 3ddb9n3w722b377d
   ANALYTICS_ID: UA-62513242-5
-kind: ConfigMap
-metadata:
-  name: dev-api-env-configmap
