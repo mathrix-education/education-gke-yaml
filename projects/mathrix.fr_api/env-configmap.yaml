@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: master-api-env-configmap
+data:
+  APP_ENV: master
+  APP_WEBROOT: https://mathrix.fr
+  APP_API: https://mathrix.fr/api
+  APP_CDN: https://cdn.mathrix.fr
+  APP_DEBUG: "false"
+  APP_TIMEZONE: Europe/Paris
+  CACHE_DRIVER: database
+  CACHE_PREFIX: ""
+  QUEUE_DRIVER: database
+  LOG_CHANNEL: stackdriver
+  DB_CONNECTION: mysql
+  DB_HOST: 10.98.80.3
+  DB_PORT: "3306"
+  DB_DATABASE: master_mathrix_education
+  DB_USERNAME: master-education
+  GOOGLE_CLOUD_STORAGE_BUCKET: cdn.mathrix.fr
+  SENTRY_DSN: https://9df8f86886e5414987f68d2096adbc2c@sentry.mathrix.fr/2
+  MAILGUN_DOMAIN: mathrix.fr
+  BRAINTREE_ENVIRONMENT: production
+  BRAINTREE_MERCHANT_ID: rzyffphs7hk49gnj
+  BRAINTREE_MERCHANT_ACCOUNT: mathrixEUR
+  BRAINTREE_PUBLIC_KEY: ry6q5p8fbjkjrzfr
+  ANALYTICS_ID: UA-62513242-7
