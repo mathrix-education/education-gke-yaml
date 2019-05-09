@@ -63,6 +63,7 @@ data:
   # STRIPE_SECRET: secret
 
   # Braintree
+  # ---------
   BRAINTREE_ENVIRONMENT: sandbox
   BRAINTREE_MERCHANT_ID: 7mjzzwmq2thkzy42
   BRAINTREE_MERCHANT_ACCOUNT: mathrixeducationsa
