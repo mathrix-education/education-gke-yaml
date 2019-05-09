@@ -10,7 +10,7 @@ metadata:
   namespace: default
 spec:
   progressDeadlineSeconds: 60
-  replicas: 1
+  replicas: 8
   selector:
     matchLabels:
       app: education-api
@@ -32,16 +32,15 @@ spec:
         type: scheduler
     spec:
       containers:
-      - envFrom:
+      - name: scheduler
+        image: eu.gcr.io/mathrix-education/education-api:latest-master
+        imagePullPolicy: Always
+        args: [scheduler]
+        envFrom:
         - configMapRef: 
             name: master-api-env-configmap
         - secretRef:
             name: master-env-secret
-        image: eu.gcr.io/mathrix-education/education-api:latest-master
-        imagePullPolicy: IfNotPresent
-        args:
-        - scheduler
-        name: master-education-api
         resources:
           requests:
             cpu: 20m

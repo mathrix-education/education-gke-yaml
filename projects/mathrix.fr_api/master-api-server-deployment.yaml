@@ -32,16 +32,15 @@ spec:
         type: server
     spec:
       containers:
-      - envFrom:
+      - name: server
+        image: eu.gcr.io/mathrix-education/education-api:latest-master
+        imagePullPolicy: Always
+        args: [server]
+        envFrom:
         - configMapRef: 
             name: master-api-env-configmap
         - secretRef:
             name: master-env-secret
-        image: eu.gcr.io/mathrix-education/education-api:latest-master
-        imagePullPolicy: IfNotPresent
-        args:
-        - server
-        name: master-education-api
         resources:
           requests:
             cpu: 20m
