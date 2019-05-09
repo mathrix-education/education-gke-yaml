@@ -10,9 +10,9 @@ steps:
       - |
         gcloud config set project $PROJECT_ID
         gcloud container clusters get-credentials --zone "$_COMPUTE_ZONE" "$_CLUSTER"
-        kubectl apply -f certificates --recursive | configured
-        kubectl apply -f nginx-ingress --recursive | configured
-        kubectl apply -f projects --recursive | configured
+        kubectl apply -f certificates --recursive | grep  configured
+        kubectl apply -f nginx-ingress --recursive | grep configured
+        kubectl apply -f projects --recursive | grep configured
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=$_COMPUTE_ZONE'
       - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER'
