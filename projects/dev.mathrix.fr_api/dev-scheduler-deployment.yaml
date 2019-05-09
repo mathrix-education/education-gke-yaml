@@ -32,16 +32,15 @@ spec:
         type: scheduler
     spec:
       containers:
-      - envFrom:
+      - name: scheduler
+        image: eu.gcr.io/mathrix-education/education-api:latest-dev
+        imagePullPolicy: Always
+        args: [scheduler]
+        envFrom:
         - configMapRef: 
             name: dev-api-env-configmap
         - secretRef:
-            name: dev-env-secret
-        image: eu.gcr.io/mathrix-education/education-api:latest-dev
-        imagePullPolicy: IfNotPresent
-        args: 
-        - scheduler
-        name: scheduler
+            name: dev-api-env-secret
         resources:
           requests:
             cpu: 20m

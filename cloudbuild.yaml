@@ -1,0 +1,13 @@
+steps:
+  - id: 'kubectl:apply'
+    name: 'gcr.io/cloud-builders/kubectl'
+    entrypoint: '/bin/bash'
+    args:
+      - '-c'
+      - |
+        kubectl apply -f --recursive certificates
+        kubectl apply -f --recursive nginx-ingress
+        kubectl apply -f --recursive projects
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-b'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=mathrix-education-cluster'

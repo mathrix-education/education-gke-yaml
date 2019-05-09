@@ -32,18 +32,15 @@ spec:
         type: server
     spec:
       containers:
-      - envFrom:
+      - name: server
+        image: eu.gcr.io/mathrix-education/education-api:latest-dev
+        imagePullPolicy: Always
+        args: [server]
+        envFrom:
         - configMapRef: 
             name: dev-api-env-configmap
         - secretRef:
-            name: dev-env-secret
-        command: 
-        - /entrypoint.sh
-        args:
-        - server
-        image: eu.gcr.io/mathrix-education/education-api:latest-dev
-        imagePullPolicy: IfNotPresent
-        name: server
+            name: dev-api-env-secret
         resources:
           requests:
             cpu: 20m

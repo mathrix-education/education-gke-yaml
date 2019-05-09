@@ -29,16 +29,15 @@ spec:
         tier: backend
     spec:
       containers:
-      - envFrom:
+      - name: worker
+        image: eu.gcr.io/mathrix-education/education-api:latest-dev
+        imagePullPolicy: Always
+        args: [worker]
+        envFrom:
         - configMapRef: 
             name: dev-api-env-configmap
         - secretRef:
-            name: dev-env-secret
-        image: eu.gcr.io/mathrix-education/education-api:latest-dev
-        imagePullPolicy: IfNotPresent
-        command: ["php"]
-        args: ["artisan","queue:work"]
-        name: worker
+            name: dev-api-env-secret
         resources:
           requests:
             cpu: 20m

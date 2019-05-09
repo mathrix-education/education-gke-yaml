@@ -3,26 +3,68 @@ kind: ConfigMap
 metadata:
   name: dev-api-env-configmap
 data:
+  # Application
+  # -----------
   APP_ENV: dev
+  APP_DEBUG: "true"
+  # APP_KEY: secret
   APP_WEBROOT: https://dev.mathrix.fr
   APP_API: https://dev.mathrix.fr/api
   APP_CDN: https://dev.cdn.mathrix.fr
-  APP_DEBUG: "true"
   APP_TIMEZONE: Europe/Paris
-  CACHE_DRIVER: database
-  CACHE_PREFIX: ""
-  QUEUE_DRIVER: database
-  LOG_CHANNEL: stackdriver
+
+  # Database
+  # --------
   DB_CONNECTION: mysql
   DB_HOST: 10.98.80.3
   DB_PORT: "3306"
   DB_DATABASE: dev_mathrix_education
   DB_USERNAME: dev-education
-  GOOGLE_CLOUD_STORAGE_BUCKET: dev.cdn.mathrix.fr
+  # DB_PASSWORD: secret
+
+  # Cache
+  # -----
+  CACHE_DRIVER: database
+  CACHE_PREFIX: ""
+
+  # Queue
+  # -----
+  QUEUE_DRIVER: database
+
+  # Sentry
+  # ------
   SENTRY_DSN: https://9df8f86886e5414987f68d2096adbc2c@sentry.mathrix.fr/2
+
+  # Mailgun
+  # -------
   MAILGUN_DOMAIN: sandbox0aa19ceedf694eff93133d0650048b38.mailgun.org
+  # MAILGUN_SECRET: secret
+
+  # Facebook App
+  # ------------
+  FACEBOOK_APP_ID: "422506811272428"
+  FACEBOOK_APP_SECRET: ***REMOVED***
+  # FACEBOOK_APP_TOKEN: secret
+
+  # Google Analytics
+  # ----------------
+  ANALYTICS_ID: UA-62513242-5
+
+  # Google Stackdriver Logging
+  # --------------------------
+  LOG_CHANNEL: stackdriver
+
+  # Google Cloud Storage
+  # --------------------
+  GOOGLE_CLOUD_STORAGE_BUCKET: dev.cdn.mathrix.fr
+
+  # Stripe
+  # ------
+  # STRIPE_SECRET: secret
+
+  # Braintree
   BRAINTREE_ENVIRONMENT: sandbox
   BRAINTREE_MERCHANT_ID: 7mjzzwmq2thkzy42
   BRAINTREE_MERCHANT_ACCOUNT: mathrixeducationsa
   BRAINTREE_PUBLIC_KEY: 3ddb9n3w722b377d
-  ANALYTICS_ID: UA-62513242-5
+  # BRAINTREE_PRIVATE_KEY: secret
