@@ -1,3 +1,6 @@
+substitutions:
+  _COMPUTE_ZONE: 'europe-west1-b'
+  _CLUSTER: 'mathrix-education-cluster'
 steps:
   - id: 'kubectl:apply'
     name: 'gcr.io/cloud-builders/gcloud'
@@ -5,11 +8,11 @@ steps:
     args:
       - '-c'
       - |
-        gcloud auth login
         gcloud config set project $PROJECT_ID
-        kubectl apply -f certificates --recursive
-        kubectl apply -f nginx-ingress --recursive
-        kubectl apply -f projects --recursive
+        gcloud container clusters get-credentials --zone "$_COMPUTE_ZONE" "$_CLUSTER"
+        kubectl apply -f certificates --recursive | configured
+        kubectl apply -f nginx-ingress --recursive | configured
+        kubectl apply -f projects --recursive | configured
     env:
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-b'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=mathrix-education-cluster'
+      - 'CLOUDSDK_COMPUTE_ZONE=$_COMPUTE_ZONE'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER'
