@@ -5,6 +5,8 @@ steps:
     args:
       - '-c'
       - |
+        gcloud auth login
+        gcloud config set project $PROJECT_ID
         kubectl apply -f certificates --recursive
         kubectl apply -f nginx-ingress --recursive
         kubectl apply -f projects --recursive
