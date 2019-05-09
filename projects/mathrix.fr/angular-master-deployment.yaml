@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   progressDeadlineSeconds: 60
-  replicas: 2
+  replicas: 8
   selector:
     matchLabels:
       app: education-angular
