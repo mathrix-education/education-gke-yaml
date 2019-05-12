@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: education-api-worker
+    app: education-api
     environment: dev
     tier: backend
     type: worker
@@ -13,7 +13,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: education-api-worker
+      app: education-api
       environment: dev
       tier: backend
       type: worker
@@ -26,10 +26,10 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: education-api-worker
+        app: education-api
         environment: dev
         tier: backend
-        tier: worker
+        type: worker
     spec:
       containers:
       - name: worker
