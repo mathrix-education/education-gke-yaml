@@ -30,7 +30,7 @@ spec:
         tier: doc
     spec:
       containers:
-      - image: eu.gcr.io/mathrix-education/education-api-redoc:latest-dev
+      - image: eu.gcr.io/mathrix-education/education-api-docs:latest-dev
         imagePullPolicy: IfNotPresent
         name: dev-education-api-redoc
         ports:
