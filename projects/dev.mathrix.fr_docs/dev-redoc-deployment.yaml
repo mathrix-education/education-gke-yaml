@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - image: eu.gcr.io/mathrix-education/education-api-docs:latest-dev
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: dev-education-api-redoc
         ports:
         - containerPort: 80
