@@ -24,11 +24,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: DB_HOST
-                  name: dev-api-env-configmap
+                  name: dev-wp-env-configmap
             - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: dev-env-secret
+                  name: dev-wp-env-secret
                   key: DB_PASSWORD
           ports:
             - containerPort: 80

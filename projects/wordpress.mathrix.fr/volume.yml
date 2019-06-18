@@ -11,3 +11,7 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
+  gcePersistentDisk:
+    pdName: wordpress-disk
+    fsType: ext4
+    
