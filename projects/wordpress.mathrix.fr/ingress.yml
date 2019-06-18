@@ -20,7 +20,7 @@ spec:
           - backend:
               serviceName: wordpress-service
               servicePort: 80
-            path:
+            path: /
   tls:
     - hosts:
         - wordpress.mathrix.fr
