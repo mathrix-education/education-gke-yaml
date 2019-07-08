@@ -1,5 +1,0 @@
-xCoucou
-Coucou
-[\'HTTPS\']=\'on\';
-['HTTPS']='on';
-$_SERVER['HTTPS']='on';

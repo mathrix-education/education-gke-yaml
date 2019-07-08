@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: dev-wp-env-configmap
-data:
-  DB_HOST: 10.98.80.3
-  DB_USER: dev-education
