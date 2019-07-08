@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: joomla.mathrix.fr-certificate
+  namespace: default
+spec:
+  secretName: joomla.mathrix.fr-secret
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  commonName: joomla.mathrix.fr
+  dnsNames:
+  - joomla.mathrix.fr
+  acme:
+    config:
+    - dns01:
+        provider: clouddns
+      domains:
+      - joomla.mathrix.fr
